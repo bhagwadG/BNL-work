@@ -1,0 +1,75 @@
+# All local jobs are part of the vanilla universe.
+Universe        = vanilla
+
+# We want email if the job completed successfully. This can
+# be set to Always, Error, or Never.
+Notification    = Complete
+
+# The executable we want to run.  Provide either an absolute path
+# or a path relative to the "Initialdir" below.
+Executable      = ./runAll.scr
+
+# The argument to pass to the executable.
+# Arguments       = 
+
+# The requirement line specifies which machines we want to
+# run this job on.  Any arbitrary classad expression can
+# be used.  The available classad attributes can be viewed with
+# the "condor_status -l <machine name>" 
+#Requirements    = (CPU_Speed >= 1 && TotalDisk > 0)
+#Requirements    = (TotalMemory >= 8000)
+
+# Rank is an expression that states how to rank machines which 
+# have already met the requirements expression.  Essentially, 
+# rank expresses preference.  A higher numeric value equals better 
+# rank.  Condor will give the job the machine with the highest rank.
+# Rank           = CPU_Speed
+
+# This tells Condor the maximum virtual image size to which
+# you believe your program will grow during its execution.
+# Image_Size      = 40 Meg
+
+# This flag is used to order one's submitted jobs within a submit
+# machine.  The jobs with the highest numbers get considered for 
+# scheduling first.
+Priority        = +20
+
+# Copy all of the user's current shell environment variables 
+# at the time of job submission.
+GetEnv          = True
+
+# Used to give jobs a directory with respect to file input 
+# and output.
+Initialdir      = /lsst/u/mzm/research/PM_Klypin
+
+# Input file given to the job.
+# Input           = /dev/null
+
+# The job's stdout is sent to this file.
+Output          = /lsst/u/mzm/research/PM_Klypin/condor.out
+
+# The job's stderr is sent to this file.
+Error           = /lsst/u/mzm/research/PM_Klypin/condor.err
+
+# The condor log file for this job, useful when debugging.
+#Log             = /lsst/u/user/condor/sim/condor.log.$(Process)
+Log             = /lsst/u/mzm/research/PM_Klypin/condor.log
+
+# Email address to send notification to.
+Notify_user     = mzm@bnl.gov
+
+# These are job flags which are non-Condor specific.
+# The "Experiment" flag should be set to the user's experiment:
+# star, phobos, phenix, brahms, atlas, etc.
++Experiment     = "lsst"
+
+# Since this is an analysis job we set this to "cas".
+# Note that this flag may not be used by all experiments.
+# The LSST queues do not use this directive.
+#+Job_Type       = "cas"
+
+# This should be the last command and tells condor to queue the
+# job.  If a number is placed after the command (i.e. Queue 15)
+# then the job will be submitted N times.  Use the $(Process)
+# macro to make your input/output and log files unique.
+Queue

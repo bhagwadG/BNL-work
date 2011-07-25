@@ -1,0 +1,18 @@
+Universe = parallel
+Initialdir = /astro/u/username/condor
+Executable = mp2script.sh
+Arguments = /astro/u/bhagwadG/codebase quasar.py
+Machine_count = 4
+Requirements = (CPU_Experiment == "astro")
+
+log = logfile
+output = outfile.condor
+error = errfile.condor
+
+should_transfer_files = yes
+when_to_transfer_output = on_exit
+Notify_user = bhagwadG@bnl.gov
+
++Experiment = "astro"
+
+Queue 
